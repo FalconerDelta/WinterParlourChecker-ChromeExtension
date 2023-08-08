@@ -1,15 +1,19 @@
 // popup.js
-chrome.runtime.sendMessage({ action: "fetchTemperature" }, response => {
-  const temperature = response.temperature;
-  document.getElementById('temperature').textContent = `Temperature: ${temperature}°C`;
+document.addEventListener('DOMContentLoaded', () => {
+  // Get the content container
+  const temperatureContainer = document.getElementById('temperature');
 
-  if (parseFloat(temperature) <= 5.0) {
-    // Show a pop-up if temperature is 5.0 or below
-    chrome.notifications.create({
-      type: 'basic',
-      iconUrl: 'images/icon48.png',
-      title: 'Temperature Alert',
-      message: `Winter Parlour Time: ${temperature}°C`,
+  // Fetch the JSON data and update the temperature
+  fetch('https://reg.bom.gov.au/fwo/IDV60901/IDV60901.94866.json')
+    .then(response => response.json())
+    .then(data => {
+      const temperature = parseFloat(data.observations.data[0].air_temp);
+      
+      // Update the temperature container with the fetched temperature
+      temperatureContainer.textContent = `Current Temperature: ${temperature}°C`;
+    })
+    .catch(error => {
+      console.error('Error fetching temperature:', error);
+      temperatureContainer.textContent = 'Error fetching temperature';
     });
-  }
 });

@@ -1,21 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Temperature Checker</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      padding: 10px;
       width: 200px;
-      height: 150px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+    }
+
+    h1 {
+      font-size: 18px;
+      color: #333;
+    }
+
+    #temperature, #fetchedTemperature {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    #temperatureIcon, #fetchedTemperatureIcon {
+      font-size: 20px;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+    #alertMessage {
+      font-size: 14px;
+      color: #d9534f;
+      margin-top: 15px;
+    }
+
+    #content {
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <h1>Temperature Checker</h1>
-  <p id="temperature">Fetching temperature...</p>
+  <div id="content">
+    <h1>Temperature Checker</h1>
+    <div id="temperature">
+      <span id="temperatureIcon">🌡️</span> Running in background
+    </div>
+    <div id="alertMessage"></div>
+  </div>
   <script src="popup.js"></script>
 </body>
 </html>
