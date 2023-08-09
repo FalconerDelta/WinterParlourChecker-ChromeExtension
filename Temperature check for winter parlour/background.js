@@ -22,7 +22,7 @@ function fetchTemperatureAndCheck() {
           message: `Current Temperature: ${temperature}°C`,
         });
 		isNotificationPaused = false
-      } else if (!isNaN(temperature) && temperature > 5.0 && temperature != previous_temp && isNotificationPaused == false) {
+      } else if (!isNaN(temperature) && temperature > 5.0 && temperature != previous_temp && !isNotificationPaused) {
 		  chrome.notifications.create({
           type: 'basic',
           iconUrl: 'images/icon48.png',
